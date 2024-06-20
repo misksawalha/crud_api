@@ -8,26 +8,26 @@ namespace crude_System_api.Controllers
     [ApiController]
 
    
-    public class StudentsController : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        List<Student> students = new List<Student>
+        List<Product> products = new List<Product>
         {
-            new Student { Id = 1,Name="misk",Description="test"},
-             new Student { Id = 2,Name="misk1",Description="test"},
-              new Student { Id = 3,Name="misk2",Description="test"}
+            new Product { Id = 1,Name="misk",Description="test"},
+             new Product { Id = 2,Name="misk1",Description="test"},
+              new Product { Id = 3,Name="misk2",Description="test"}
         };
 
         [HttpGet("getAll")]
         public IActionResult getAll()
         {
-            return Ok(students);
+            return Ok(products);
 
         }
         [HttpGet("{id}")]
 
         public IActionResult getById(int id)
         {
-            var student = students.Find(x=>x.Id==id);
+            var student = products.Find(x=>x.Id==id);
             if(student == null)
             {
                 return NotFound();
@@ -36,28 +36,28 @@ namespace crude_System_api.Controllers
         }
         [HttpPost]
 
-        public IActionResult Add(Student request)
+        public IActionResult Add(Product request)
         {
             if(request == null)
             {
                 return BadRequest();
             }
 
-            var student = new Student 
+            var student = new Product 
             { 
                 Id = request.Id,
                 Name = request.Name,
                 Description = request.Description,
             
             };
-            students.Add(student);
+            products.Add(student);
             return Ok(student);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Edit(int id ,Student request)
+        public IActionResult Edit(int id ,Product request)
         {
-            var currentStudent  = students.FirstOrDefault(x=>x.Id==id);
+            var currentStudent  = products.FirstOrDefault(x=>x.Id==id);
             if(currentStudent == null)
             {
                 return BadRequest();
@@ -72,13 +72,13 @@ namespace crude_System_api.Controllers
 
         public IActionResult Delete(int id)
         {
-            var currentStudent = students.FirstOrDefault(x => x.Id == id);
+            var currentStudent = products.FirstOrDefault(x => x.Id == id);
             if (currentStudent == null)
             {
                 return BadRequest();
             }
            
-            students.Remove(currentStudent);
+            products.Remove(currentStudent);
 
             return Ok();
         }
